@@ -6,16 +6,43 @@
   <body>
     <span>这个也是vm的模式,首先要一个接入点</span>
     <div id="myDiagramDiv"
-         style="width:600px; height:400px; background-color: #004388;"></div>
+         style="width:1024px; height:720px; background-color: #002b58;"></div>
     <script>
       const $ = go.GraphObject.make;
       let myDiagramDiv = $(go.Diagram, "myDiagramDiv", {
         "undoManager.isEnabled": false
       });
       
-      myDiagramDiv.nodeTemplate = $(go.Node, "Vertical",
-        $(go.TextBlock, {},
-          new go.Binding("text", "name"))
+      myDiagramDiv.nodeTemplate = $(go.Node, "Auto",
+        {},
+        $(go.Shape, "RoundedRectangle", { strokeWidth: 0, fill: "#004378"}),
+        $(go.Panel, "Table",{ defaultAlignment: go.Spot.Left },
+
+          $(go.Panel, "Horizontal", { margin: 6}, { row: 0, column:0 },
+            $(go.TextBlock, "号码:", { textAlign: "left", margin: 0, stroke: "white"}),
+            $(go.TextBlock, "", { textAlign: "left", margin: 0, stroke: "white"},
+              new go.Binding("text", "tel"))
+          ),
+          $(go.TextBlock, "查看图谱", { textAlign: "left", margin: 6, stroke: "white"}, {row: 0, column:2}),
+
+          $(go.Panel, "Horizontal", { margin: 6}, { row: 1, column:0 },
+            $(go.TextBlock, "姓名:", { textAlign: "left", margin: 0, stroke: "white"}),
+            $(go.TextBlock, "", { textAlign: "left", margin: 0, stroke: "white"},
+              new go.Binding("text", "name"))
+          ),
+
+          $(go.Panel, "Horizontal", { margin: 6}, { row: 2, column:0 },
+            $(go.TextBlock, "身份证号码:", { textAlign: "left", margin: 0, stroke: "white"}),
+            $(go.TextBlock, "", { textAlign: "left", margin: 0, stroke: "white"},
+              new go.Binding("text", "id"))
+          ),
+
+          $(go.Panel, "Horizontal", { margin: 6}, { row: 3, column:0 },
+            $(go.TextBlock, "通联人数:", { textAlign: "left", margin: 0, stroke: "white"}),
+            $(go.TextBlock, "", { textAlign: "left", margin: 0, stroke: "white"},
+              new go.Binding("text", "linkNum"))
+          )
+        )
       );
       
       myDiagramDiv.layout = $(go.TreeLayout, { nodeSpacing: 3 });
@@ -27,25 +54,38 @@
             curve: go.Link.Bezier,
             toEndSegmentLength: 30, fromEndSegmentLength: 30
           },
-          $(go.Shape, { strokeWidth: 1.5 }) // the link shape, with the default black stroke
+          $(go.Shape, { strokeWidth: 1.5, stroke: "#57728f" }) // the link shape, with the default black stroke
         );
 
 
       let myModel = $(go.TreeModel);
       myModel.nodeDataArray = [
-          { key: "1",              name: "Don Meow",   source: "/images/learn/cat1.png" },
-          { key: "2", parent: "1", name: "Demeter",    source: "/images/learn/cat2.png" },
-          { key: "3", parent: "1", name: "Copricat",   source: "/images/learn/cat3.png" },
-          { key: "4", parent: "1", name: "Jellylorum", source: "/images/learn/cat4.png" },
-          { key: "5", parent: "1", name: "Alonzo",     source: "/images/learn/cat5.png" },
-          { key: "6", parent: "1", name: "Alonzo",     source: "/images/learn/cat5.png" },
-          { key: "7", parent: "1", name: "Alonzo",     source: "/images/learn/cat5.png" },
-          { key: "8", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
-          { key: "9", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
-          { key: "10", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
-          { key: "11", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
-          { key: "12", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
-          { key: "13", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" }
+          { key: "1",              name: "Don Meow",   tel: "13844556677", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "2", parent: "1", name: "Demeter",    tel: "13844556678", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "3", parent: "1", name: "Copricat",   tel: "13844556679", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "4", parent: "1", name: "Jellylorum", tel: "13844556680", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "5", parent: "1", name: "Alonzo",     tel: "13844556681", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "6", parent: "1", name: "Alonzo",     tel: "13844556682", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "7", parent: "1", name: "Alonzo",     tel: "13844556683", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "8", parent: "2", name: "Munkustrap", tel: "13844556684", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "9", parent: "2", name: "Munkustrap", tel: "13844556685", id:
+             "2202220222202220", linkNum: "24人" },
+          { key: "10", parent: "2", name: "Munkustrap", tel: "13844556686", id:
+             "2202220222202220", linkNum: "24人" },
+          { key: "11", parent: "2", name: "Munkustrap", tel: "13844556687", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "12", parent: "2", name: "Munkustrap", tel: "13844556688", id:
+            "2202220222202220", linkNum: "24人" },
+          { key: "13", parent: "2", name: "Munkustrap", tel: "13844556689", id:
+            "2202220222202220", linkNum: "24人" }
       ];
       myDiagramDiv.model = myModel;
     </script>
