@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/gojs/release/go-debug.js"></script>
+  </head>
+  <body>
+    <span>这个也是vm的模式,首先要一个接入点</span>
+    <div id="myDiagramDiv"
+         style="width:600px; height:400px; background-color: #004388;"></div>
+    <script>
+      const $ = go.GraphObject.make;
+      let myDiagramDiv = $(go.Diagram, "myDiagramDiv", {
+        "undoManager.isEnabled": false
+      });
+      
+      myDiagramDiv.nodeTemplate = $(go.Node, "Vertical",
+        $(go.TextBlock, {},
+          new go.Binding("text", "name"))
+      );
+      
+      myDiagramDiv.layout = $(go.TreeLayout, { nodeSpacing: 3 });
+
+      // Define a trivial link template with no arrowhead
+      myDiagramDiv.linkTemplate =
+        $(go.Link,
+          {
+            curve: go.Link.Bezier,
+            toEndSegmentLength: 30, fromEndSegmentLength: 30
+          },
+          $(go.Shape, { strokeWidth: 1.5 }) // the link shape, with the default black stroke
+        );
+
+
+      let myModel = $(go.TreeModel);
+      myModel.nodeDataArray = [
+          { key: "1",              name: "Don Meow",   source: "/images/learn/cat1.png" },
+          { key: "2", parent: "1", name: "Demeter",    source: "/images/learn/cat2.png" },
+          { key: "3", parent: "1", name: "Copricat",   source: "/images/learn/cat3.png" },
+          { key: "4", parent: "1", name: "Jellylorum", source: "/images/learn/cat4.png" },
+          { key: "5", parent: "1", name: "Alonzo",     source: "/images/learn/cat5.png" },
+          { key: "6", parent: "1", name: "Alonzo",     source: "/images/learn/cat5.png" },
+          { key: "7", parent: "1", name: "Alonzo",     source: "/images/learn/cat5.png" },
+          { key: "8", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
+          { key: "9", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
+          { key: "10", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
+          { key: "11", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
+          { key: "12", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" },
+          { key: "13", parent: "2", name: "Munkustrap", source: "/images/learn/cat6.png" }
+      ];
+      myDiagramDiv.model = myModel;
+    </script>
+  </body>
+</html>
