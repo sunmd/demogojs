@@ -27,3 +27,6 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+1. demo页面在src/views/demo-test.html
+2. 封装的vue在src/components/Diagram.vue
